@@ -16,32 +16,29 @@
 <main class="builder-container">
 
     <!-- STEP FORM SECTION -->
-    <section class="form-section">
-        <h2>Document Details</h2>
+  <section class="form-section">
+    <h2>Select Document Type</h2>
 
-        <label>Document Title</label>
-        <input type="text" id="docTitle" placeholder="e.g. Student Report, Contract Agreement">
+    <div class="doc-types">
+        <button onclick="selectType('student')">📘 Student Report</button>
+        <button onclick="selectType('business')">💼 Business Contract</button>
+        <button onclick="selectType('finance')">🏦 Financial Document</button>
+        <button onclick="selectType('personal')">🧍 Personal Letter</button>
+    </div>
 
-        <label>Issuer Name</label>
-        <input type="text" id="issuerName" placeholder="School, Company, Organization">
+    <div id="dynamicFields"></div>
 
-        <label>Recipient Name</label>
-        <input type="text" id="recipientName" placeholder="Student, Client, Employee">
+    <label>Theme Color</label>
+    <input type="color" id="themeColor" value="#00c9a7">
 
-        <label>Document Content</label>
-        <textarea id="docContent" placeholder="Write the main content of the document..."></textarea>
+    <label>Upload Logo</label>
+    <input type="file" id="logoUpload" accept="image/*">
 
-        <label>Choose Theme Color</label>
-        <input type="color" id="themeColor" value="#00c9a7">
+    <label>Upload Photo</label>
+    <input type="file" id="photoUpload" accept="image/*">
 
-        <label>Upload Logo (optional)</label>
-        <input type="file" id="logoUpload" accept="image/*">
-
-        <label>Upload Photo (optional)</label>
-        <input type="file" id="photoUpload" accept="image/*">
-
-        <button onclick="updatePreview()">Update Preview</button>
-    </section>
+    <button onclick="updatePreview()">Generate Document</button>
+</section>
 
     <!-- LIVE PREVIEW SECTION -->
     <section class="preview-section">
