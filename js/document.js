@@ -1,44 +1,76 @@
-function updatePreview() {
-    const title = document.getElementById("docTitle").value;
-    const issuer = document.getElementById("issuerName").value;
-    const recipient = document.getElementById("recipientName").value;
-    const content = document.getElementById("docContent").value;
-    const themeColor = document.getElementById("themeColor").value;
+let selectedType = "";
 
-    document.getElementById("previewTitle").innerText = title || "Document Title";
-    document.getElementById("previewIssuer").innerText = issuer || "Issuer Name";
-    document.getElementById("previewRecipient").innerText = recipient || "Recipient Name";
-    document.getElementById("previewContent").innerText = content || "Document content will appear here...";
+function selectType(type) {
+    selectedType = type;
+    const fields = document.getElementById("dynamicFields");
 
-    document.getElementById("previewHeader").style.color = themeColor;
-
-    const today = new Date().toLocaleDateString();
-    document.getElementById("previewDate").innerText = today;
-
-    const docNumber = "DF-" + Math.floor(Math.random() * 100000);
-    document.getElementById("previewNumber").innerText = docNumber;
-
-    const logoInput = document.getElementById("logoUpload");
-    const photoInput = document.getElementById("photoUpload");
-
-    if (logoInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            const logo = document.getElementById("previewLogo");
-            logo.src = e.target.result;
-            logo.style.display = "block";
-        };
-        reader.readAsDataURL(logoInput.files[0]);
+    if (type === "student") {
+        fields.innerHTML = `
+            <label>Student Name</label>
+            <input type="text" id="studentName">
+            <label>Class</label>
+            <input type="text" id="studentClass">
+            <label>Teacher Comment</label>
+            <textarea id="teacherComment"></textarea>
+        `;
     }
 
-    if (photoInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            const photo = document.getElementById("previewPhoto");
-            photo.src = e.target.result;
-            photo.style.display = "block";
-        };
-        reader.readAsDataURL(photoInput.files[0]);
+    if (type === "business") {
+        fields.innerHTML = `
+            <label>Party A</label>
+            <input type="text" id="partyA">
+            <label>Party B</label>
+            <input type="text" id="partyB">
+            <label>Agreement Terms</label>
+            <textarea id="terms"></textarea>
+        `;
+    }
+
+    if (type === "finance") {
+        fields.innerHTML = `
+            <label>Client Name</label>
+            <input type="text" id="clientName">
+            <label>Amount</label>
+            <input type="number" id="amount">
+            <label>Purpose</label>
+            <textarea id="purpose"></textarea>
+        `;
+    }
+
+    if (type === "personal") {
+        fields.innerHTML = `
+            <label>Your Name</label>
+            <input type="text" id="yourName">
+            <label>Recipient</label>
+            <input type="text" id="recipient">
+            <label>Message</label>
+            <textarea id="message"></textarea>
+        `;
     }
 }
 
+function updatePreview() {
+    const preview = document.getElementById("previewContent");
+    let text = "";
+
+    if (selectedType === "student") {
+        text = `Student: ${studentName.value}\nClass: ${studentClass.value}\nComment: ${teacherComment.value}`;
+    }
+
+    if (selectedType === "business") {
+        text = `Agreement Between ${partyA.value} and ${partyB.value}\nTerms:\n${terms.value}`;
+    }
+
+    if (selectedType === "finance") {
+        text = `Client: ${clientName.value}\nAmount: $${amount.value}\nPurpose: ${purpose.value}`;
+    }
+
+    if (selectedType === "personal") {
+        text = `From: ${yourName.value}\nTo: ${recipient.value}\nMessage:\n${message.value}`;
+    }
+
+    preview.innerText = text || "Your generated document will appear here.";
+
+    document.getElementById("previewDate").innerText = new Date().toLocaleDateString();
+    document.getElementById("previewNumber").innerText = "DF-" + Math.floor(Math.random() * 100000);
+}
