@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Document - DocuForge</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo-shape">DF</div>
+    <h1>Document Builder</h1>
+    <p>Create professional documents step by step</p>
+</header>
+
+<main class="builder-container">
+
+    <!-- STEP FORM SECTION -->
+    <section class="form-section">
+        <h2>Document Details</h2>
+
+        <label>Document Title</label>
+        <input type="text" id="docTitle" placeholder="e.g. Student Report, Contract Agreement">
+
+        <label>Issuer Name</label>
+        <input type="text" id="issuerName" placeholder="School, Company, Organization">
+
+        <label>Recipient Name</label>
+        <input type="text" id="recipientName" placeholder="Student, Client, Employee">
+
+        <label>Document Content</label>
+        <textarea id="docContent" placeholder="Write the main content of the document..."></textarea>
+
+        <label>Choose Theme Color</label>
+        <input type="color" id="themeColor" value="#00c9a7">
+
+        <label>Upload Logo (optional)</label>
+        <input type="file" id="logoUpload" accept="image/*">
+
+        <label>Upload Photo (optional)</label>
+        <input type="file" id="photoUpload" accept="image/*">
+
+        <button onclick="updatePreview()">Update Preview</button>
+    </section>
+
+    <!-- LIVE PREVIEW SECTION -->
+    <section class="preview-section">
+        <div class="document-preview" id="preview">
+
+            <div class="preview-header" id="previewHeader">
+                <h2 id="previewTitle">Document Title</h2>
+                <img id="previewLogo" style="display:none; max-width:80px;">
+            </div>
+
+            <p><strong>From:</strong> <span id="previewIssuer">Issuer Name</span></p>
+            <p><strong>To:</strong> <span id="previewRecipient">Recipient Name</span></p>
+
+            <img id="previewPhoto" style="display:none; width:100px; margin:10px 0;">
+
+            <p id="previewContent">Document content will appear here...</p>
+
+            <p style="margin-top:30px;"><strong>Date:</strong> <span id="previewDate"></span></p>
+            <p><strong>Document No:</strong> <span id="previewNumber"></span></p>
+
+            <div class="signature-box">
+                <p>Signature: ____________________</p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="js/document.js"></script>
+</body>
+</html>
 
